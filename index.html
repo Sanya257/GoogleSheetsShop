@@ -4,22 +4,51 @@
     <meta charset="UTF-8">
     <title>Google Shop</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 <body>
+<header>
+    <div class="obj-cart">
+    <h3><i class="fas fa-shopping-cart"></i>Корзина</h3>
+        <div class="wrap-cart">
+            <ul class="cart">
+            </ul>
+            <button>Перейти в корзину</button>
+            <button>Оформить заказ</button>
+        </div>
+    </div>
+</header>
+<aside>
 
+</aside>
+<section class="banner">
+    <div class="slider">
+    <input type="radio" name="switch" id="btn1" checked>
+    <input type="radio" name="switch" id="btn2">
+    <input type="radio" name="switch" id="btn3">
+
+    <div class="switch">
+        <label for="btn1"></label>
+        <label for="btn2"></label>
+        <label for="btn3"></label>
+    </div>
+
+    <div class="slider-inner">
+        <div class="slides">
+            <img src="http://conceptartworld.com/wp-content/uploads/2013/10/Mathieu_Latour-Duhaime_Art_exo-02-small-680x340.jpg"/>
+            <img src="http://conceptartworld.com/wp-content/uploads/2013/10/Mathieu_Latour-Duhaime_Concept_Art_Thief_01-680x340.jpg"/>
+            <img src="http://conceptartworld.com/wp-content/uploads/2013/10/Mathieu_Latour-Duhaime_Concept_Art_Thief_07-680x340.jpg"/>
+        </div>
+    </div>
+
+    </div>
+</section>
 <div class="shop-list"></div>
-<div>
-    <h3>Корзина</h3>
-    <ul class="cart">
-
-    </ul>
-
-</div>
 <script
         src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
 <script src="script.js"></script>
-
+<script src="script2.js"></script>
 </body>
 </html>

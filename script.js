@@ -1,31 +1,45 @@
 $(document).ready(() => {
     $.getJSON('https://spreadsheets.google.com/feeds/list/1nHYiEKT5AY_tkgmauVL0OXDVDMEQCMciH7EqqJLca78/1/public/full?alt=json',
         (data) => {
-console.log(data.feed.entry);
+            data = data['feed']['entry'];
             var out = '';
+            var banner='';
             for (var i = 0; i < data.length; i++) {
-                out += `<div class="item"><img width="200" height="200" src="${data[i].img}">
-                    <h2 class='name'>${data[i].feed.entry.gsx$name}</h2>
-                    <h3 class='price'>Цена:${data[i].price}грн</h3>
-                    <button class="buy" data="${data[i].id}">Купить</button>
-</div>`
+                out += `<div class="item"><img width="200" height="200" src="${data[i]['gsx$img']['$t']}">
+                    <h2 class='name'>${data[i]['gsx$name']['$t']}</h2>
+                    <h3 class='price'>Цена:${data[i]['gsx$price']['$t']}грн</h3>
+                    <button class="buy" data="${data[i]['gsx$id']['$t']}">Купить</button></div>`
             }
+            for (var i = 0; i < 3; i++) {
+                banner+=`<img src="${data[i]['gsx$banner']['$t']}">`;
+            }
+            console.log(data);
             $('.shop-list').html(out);
-            var cart={};
-         $('.buy').on('click',function (e) {
-             if(e.target.attributes.data.nodeValue){
-             addToCart(e.target.attributes.data.nodeValue);
-             console.log(cart);
-                 }
-         });
-         function addToCart(elem) {
-             if(cart[elem]!==undefined){
-                 cart[elem]++;
-             }else {
-             cart[elem]=1;
-             }
+            $('.slides').html(banner);
+            let cart = [];
+            $('.buy').on('click', function (e) {
+                if (e.target.attributes.data.nodeValue) {
+                    addToCart(e.target.attributes.data.nodeValue);
+                }
+            });
 
-             }
+            function addToCart(elemId) {
+                if (cart[elemId] !== undefined) {
+                    cart[elemId]++;
+                } else {
+                    cart[elemId] = 1;
+                }
+                showCart();
+            }
 
+            function showCart() {
+                let li = '';
+                for (let key in cart) {
+                    li += `<li>${data[key]['gsx$name']['$t']}</li>`;
+                    li += cart[key];
+                    $('.cart').html(li);
+                }
+
+            }
         });
 });
