@@ -5,9 +5,9 @@ $(document).ready(() => {
             var out = '';
             var banner='';
             for (var i = 0; i < data.length; i++) {
-                out += `<div class="item"><img width="200" height="200" src="${data[i]['gsx$img']['$t']}">
-                    <h2 class='name'>${data[i]['gsx$name']['$t']}</h2>
-                    <h3 class='price'>Цена:${data[i]['gsx$price']['$t']}грн</h3>
+                out += `<div class="item"><img width="150" height="180" src="${data[i]['gsx$img']['$t']}">
+                    <h4 class='name'>${data[i]['gsx$name']['$t']}</h4>
+                   <h3 class='price'>Цена:${data[i]['gsx$price']['$t']}грн</h3>
                     <button class="buy" data="${data[i]['gsx$id']['$t']}">Купить</button></div>`
             }
             for (var i = 0; i < 3; i++) {
@@ -16,7 +16,7 @@ $(document).ready(() => {
             console.log(data);
             $('.shop-list').html(out);
             $('.slides').html(banner);
-            let cart = [];
+            let cart = {};
             $('.buy').on('click', function (e) {
                 if (e.target.attributes.data.nodeValue) {
                     addToCart(e.target.attributes.data.nodeValue);
@@ -29,9 +29,15 @@ $(document).ready(() => {
                 } else {
                     cart[elemId] = 1;
                 }
-                showCart();
+                localStorage.setItem('cart',JSON.stringify(cart));
+showCart();
             }
-
+            function loadCartFromStorage() {
+                if(localStorage.getItem('cart')!=null){
+                    cart=JSON.parse(cart=localStorage.getItem('cart'));
+                }
+            };
+            loadCartFromStorage();
             function showCart() {
                 let li = '';
                 for (let key in cart) {
@@ -41,5 +47,6 @@ $(document).ready(() => {
                 }
 
             }
+            showCart();
         });
 });
